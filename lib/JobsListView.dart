@@ -6,21 +6,21 @@ import 'dart:convert';
 import './Job.dart';
 
 class JobsListView extends StatelessWidget {
-  Future<List<Job>> _fetchJobs() async {
-    final jobsListAPIUrl = 'https://mock-json-service.glitch.me/';
-    final response = await http.get(jobsListAPIUrl);
-    if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      return jsonResponse.map((job) => new Job.fromJson(job)).toList();
-    } else {
-      throw Exception('Failed to load jobs from API');
-    }
-  }
+  // Future<List<Job>> fetchJobs() async {
+  //   final jobsListAPIUrl = 'https://mock-json-service.glitch.me/';
+  //   final response = await http.get(jobsListAPIUrl);
+  //   if (response.statusCode == 200) {
+  //     List jsonResponse = json.decode(response.body);
+  //     return jsonResponse.map((job) => new Job.fromJson(job)).toList();
+  //   } else {
+  //     throw Exception('Failed to load jobs from API');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Job>>(
-      future: _fetchJobs(),
+      future: JobRequest().fetchJobs(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           List<Job> data = snapshot.data;
